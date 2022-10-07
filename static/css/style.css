@@ -1,0 +1,19 @@
+body
+{
+    background: url("background.png");
+    background-size: 100%;
+}
+.input
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+.input[type='country'], input[type='city']
+{
+    display: table-cell;
+}
+.output
+{
+    display: table-cell;
+}

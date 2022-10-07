@@ -1,0 +1,32 @@
+<html>
+    <head>
+        <title>
+            Weather App
+        </title>
+        <link rel="stylesheet"
+              href="{{ url_for('static', filename='css/style.css') }}">
+    </head>
+    <body>
+        <form method="POST">
+            <div class="input">
+                <p>
+                    <label for="city">Enter city:</label>
+                    <input type="text" id="city" name="city" maxlength="60" autocomplete="off">
+                </p>
+                <p>
+                    <label for="country">Enter country:</label>
+                    <input type="text" id="country" name="country" maxlength="60" autocomplete="off">
+                </p>
+                <input type="reset" name="button_reset" value="Reset">
+                <input type="submit" name="button_submit" value="Submit">
+            </div>
+            <div class="output">
+                <p><label>Status:      {{status_var}}</label></p>
+                <p><label>Temperature: {{temperature_var}}</label></p>
+                <p><label>Clouds:      {{clouds_var}}</label></p>
+                <p><label>Wind status: {{wind_var}}</label></p>
+                <p><label>Time:        {{time_var}}</label></p>
+            </div>
+        </form>
+    </body>
+</html>
