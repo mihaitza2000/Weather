@@ -1,19 +1,75 @@
 body
 {
     background: url("background.png");
-    background-size: 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .input
 {
-    position: fixed;
-    top: 50%;
+    display: table;
+    position: absolute;
+    top: 25%;
     left: 50%;
+    transform: translate(-50%, -50%);
+    height: 10vh;
+    width: 30vw;
 }
-.input[type='country'], input[type='city']
+.output_left
+{
+    display: table;
+    position: absolute;
+    top: 75%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    left: 22%;
+    width: 20%;
+}
+.output_middle
+{
+    display: table;
+    position: absolute;
+    top: 75%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    left: 50%;
+    width: 20%;
+}
+.output_right
+{
+    display: table;
+    position: absolute;
+    top: 75%;
+    transform: translate(-50%, -50%);
+    height: auto;
+    left: 77%;
+    width: 20%;
+}
+.input_row_1,
+.input_row_2,
+.input_row_3,
+.inout_row_4,
+.output_row_1,
+.output_row_2,
+.output_row_3,
+.output_row_4
+{
+    display: table-row;
+}
+.city_label,
+.city_input,
+.country_label,
+.country_input,
+.reset_button,
+.submit_button,
+.status_label,
+.status_value,
+.temperature_label,
+.temperature_value,
+.clouds_label,
+.clouds_value,
+.wind_label,
+.wind_value
 {
     display: table-cell;
-}
-.output
-{
-    display: table-cell;
+    width: 5vw;
 }
