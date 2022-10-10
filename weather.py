@@ -2,6 +2,8 @@ import json  # to work with json data
 import requests  # to send requests to APIs
 from math import floor
 from flask import Flask, render_template, request  # flask libs
+from datetime import datetime, timedelta
+from logging import FileHandler, WARNING
 
 APIs = {
     'coordinates': '06885633a5bd4142814a571258329b2e',
@@ -19,6 +21,8 @@ wind_classification = {
 
 
 app = Flask(__name__)
+file_handler = FileHandler('errorlog.txt')
+file_handler.setLevel(WARNING)
 
 
 def convert_temperature(degree):
@@ -45,7 +49,7 @@ def wind_classifier(wind_speed):
     return "Hurricane"
 
 
-def get_data(coordinates):
+def get_forecast(coordinates):
     data_list = list()
     if coordinates is not None:
         lat, lon = coordinates
@@ -59,8 +63,15 @@ def get_data(coordinates):
                 data['temperature'] = convert_temperature(info_data['list'][i]['main']['temp'])+" C"
                 data['clouds']      = str(info_data['list'][i]['clouds']['all'])+"%"
                 data['wind_status'] = wind_classifier(info_data['list'][i]['wind']['speed'])
-                data['time']        = info_data['list'][i]['dt_txt']
+                data['time']        = info_data['list'][i]['dt_txt'].split(' ')
                 data_list.append(data)
+        data_list_copy = data_list.copy()
+        now = datetime.now()
+        today_date = now.strftime('%Y-%m-%d')
+        tomorrow_date = (now + timedelta(1)).strftime('%Y-%m-%d')
+        print(today_date, tomorrow_date)
+        today_hour = now.time().hour
+        data_list = list(filter(lambda data: (data['time'][0] == today_date and int(data['time'][1].split(':')[0]) > today_hour) or data['time'][0] == tomorrow_date, data_list_copy))
     else:
         data = dict()  # create dictionary to store our data
         data['status'] = ""
@@ -69,23 +80,36 @@ def get_data(coordinates):
         data['wind_status'] = ""
         data['time'] = ""
         data_list.append(data)
-    for i in range(40):
+        data_list.append(data)
+        data_list.append(data)
+    for i in range(len(data_list)):
         print(json.dumps(data_list[i], indent=2))
-    return data_list[0]
+    return data_list[0:3]
 
 
 @app.route('/', methods=["POST", "GET"])
 def function():
     if request.method == "POST":
-        data_var = get_data(get_lat_long(f"{request.form['city']}, {request.form['country']}"))
-        return render_template('index.html',
-                               status_var     = data_var['status'],
-                               temperature_var= data_var['temperature'],
-                               clouds_var     = data_var['clouds'],
-                               wind_var       = data_var['wind_status'],
-                               time_var       = data_var['time'])
+        data_var = get_forecast(get_lat_long(f"{request.form['city']}, {request.form['country']}"))
+        return render_template(
+            'index.html',
+            status_var_left      = data_var[0]['status'],
+            temperature_var_left = data_var[0]['temperature'],
+            clouds_var_left      = data_var[0]['clouds'],
+            wind_var_left        = data_var[0]['wind_status'],
+            time_var_left        = data_var[0]['time'][1].split(':')[0],
+            status_var_middle      = data_var[1]['status'],
+            temperature_var_middle = data_var[1]['temperature'],
+            clouds_var_middle      = data_var[1]['clouds'],
+            wind_var_middle        = data_var[1]['wind_status'],
+            time_var_middle        = data_var[1]['time'][1].split(':')[0],
+            status_var_right      = data_var[2]['status'],
+            temperature_var_right = data_var[2]['temperature'],
+            clouds_var_right      = data_var[2]['clouds'],
+            wind_var_right        = data_var[2]['wind_status'],
+            time_var_right        = data_var[2]['time'][1].split(':')[0])
     return render_template("index.html")
 
 
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0")
+    app.run(port = 8080)
