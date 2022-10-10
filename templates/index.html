@@ -9,23 +9,77 @@
     <body>
         <form method="POST">
             <div class="input">
-                <p>
-                    <label for="city">Enter city:</label>
-                    <input type="text" id="city" name="city" maxlength="60" autocomplete="off">
-                </p>
-                <p>
-                    <label for="country">Enter country:</label>
-                    <input type="text" id="country" name="country" maxlength="60" autocomplete="off">
-                </p>
-                <input type="reset" name="button_reset" value="Reset">
-                <input type="submit" name="button_submit" value="Submit">
+                <div class="input_row_1">
+                    <div class="city_label"><label for="city">Enter city:</label></div>
+                    <div class="city_input"><input type="text" id="city" name="city" maxlength="60" autocomplete="off"></div>
+                </div>
+                <div class="input_row_2">
+                    <div class="country_label"><label for="country">Enter country:</label></div>
+                    <div class="country_input"><input type="text" id="country" name="country" maxlength="60" autocomplete="off"></div>
+                </div>
+                <div class="input_row_3">
+                    <div class="reset_button"><input type="reset" name="button_reset" value="Reset"></div>
+                </div>
+                <div class="input_row_4">
+                    <div class="submit_button"><input type="submit" name="button_submit" value="Submit"></div>
+                </div>
             </div>
-            <div class="output">
-                <p><label>Status:      {{status_var}}</label></p>
-                <p><label>Temperature: {{temperature_var}}</label></p>
-                <p><label>Clouds:      {{clouds_var}}</label></p>
-                <p><label>Wind status: {{wind_var}}</label></p>
-                <p><label>Time:        {{time_var}}</label></p>
+            <div class="output_left">
+                <p text_align="center">{{time_var_left}}</p>
+                <div class="output_row_1">
+                    <div class="status_label"><label>Status:</label></div>
+                    <div class="status_value"><label>{{status_var_left}}</label></div>
+                </div>
+                <div class="output_row_2">
+                    <div class="temperature_label"><label>Temperature:</label></div>
+                    <div class="temperature_value"><label>{{temperature_var_left}}</label></div>
+                </div>
+                <div class="output_row_3">
+                    <div class="clouds_label"><label>Clouds:</label></div>
+                    <div class="clouds_value"><label>{{clouds_var_left}}</label></div>
+                </div>
+                <div class="output_row_4">
+                    <div class="wind_label"><label>Wind status:</label></div>
+                    <div class="wind_value"><label>{{wind_var_left}}</label></div>
+                </div>
+            </div>
+            <div class="output_middle">
+                <p text_align="center">{{time_var_middle}}</p>
+                <div class="output_row_1">
+                    <div class="status_label"><label>Status:</label></div>
+                    <div class="status_value"><label>{{status_var_middle}}</label></div>
+                </div>
+                <div class="output_row_2">
+                    <div class="temperature_label"><label>Temperature:</label></div>
+                    <div class="temperature_value"><label>{{temperature_var_middle}}</label></div>
+                </div>
+                <div class="output_row_3">
+                    <div class="clouds_label"><label>Clouds:</label></div>
+                    <div class="clouds_value"><label>{{clouds_var_middle}}</label></div>
+                </div>
+                <div class="output_row_4">
+                    <div class="wind_label"><label>Wind status:</label></div>
+                    <div class="wind_value"><label>{{wind_var_middle}}</label></div>
+                </div>
+            </div>
+            <div class="output_right">
+                <p text_align="center">{{time_var_right}}</p>
+                <div class="output_row_1">
+                    <div class="status_label"><label>Status:</label></div>
+                    <div class="status_value"><label>{{status_var_right}}</label></div>
+                </div>
+                <div class="output_row_2">
+                    <div class="temperature_label"><label>Temperature:</label></div>
+                    <div class="temperature_value"><label>{{temperature_var_right}}</label></div>
+                </div>
+                <div class="output_row_3">
+                    <div class="clouds_label"><label>Clouds:</label></div>
+                    <div class="clouds_value"><label>{{clouds_var_right}}</label></div>
+                </div>
+                <div class="output_row_4">
+                    <div class="wind_label"><label>Wind status:</label></div>
+                    <div class="wind_value"><label>{{wind_var_right}}</label></div>
+                </div>
             </div>
         </form>
     </body>
